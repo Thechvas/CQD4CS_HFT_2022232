@@ -6,7 +6,7 @@ namespace CQD4CS_HFT_2022232.Client
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Hello Program!");
         }
     }
 }
