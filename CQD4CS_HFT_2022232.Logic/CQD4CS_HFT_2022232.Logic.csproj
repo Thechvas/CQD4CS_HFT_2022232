@@ -9,4 +9,8 @@
     <ProjectReference Include="..\CQD4CS_HFT_2022232.Repository\CQD4CS_HFT_2022232.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Classes\" />
+  </ItemGroup>
+
 </Project>
