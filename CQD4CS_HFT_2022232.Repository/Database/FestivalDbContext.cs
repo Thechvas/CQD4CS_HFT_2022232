@@ -50,6 +50,41 @@ namespace CQD4CS_HFT_2022232.Repository.Database
                 .OnDelete(DeleteBehavior.Cascade);
             });
 
+            Festival lolla = new Festival() { Id = 1, Name = "Lollapalooza", Location = "Chicago", Duration = 4 };
+            Festival sziget = new Festival() { Id = 2, Name = "Sziget Fesztivál", Location = "Budapest", Duration = 6 };
+            Festival sound = new Festival() { Id = 3, Name = "Balaton Sound", Location = "Zamárdi", Duration = 4 };
+            Festival tomorrowland = new Festival() { Id = 4, Name = "Tomorrowland", Location = "Boom", Duration = 6 };
+
+            Artist ariana = new Artist() { Id = 1, FestivalId = lolla.Id, Name = "Ariana Grande", NumOfAlbums = 6 };
+            Artist weeknd = new Artist() { Id = 2, FestivalId = lolla.Id, Name = "The Weeknd", NumOfAlbums = 5 };
+            Artist em = new Artist() { Id = 3, FestivalId = lolla.Id, Name = "Eminem", NumOfAlbums = 11 };
+            Artist dua = new Artist() { Id = 4, FestivalId = sziget.Id, Name = "Dua Lipa", NumOfAlbums = 2 };
+            Artist sia = new Artist() { Id = 5, FestivalId = sziget.Id, Name = "Sia", NumOfAlbums = 9 };
+            Artist illenium = new Artist() { Id = 6, FestivalId = sound.Id, Name = "Illenium", NumOfAlbums = 5 };
+            Artist zedd = new Artist() { Id = 7, FestivalId = sound.Id, Name = "Zedd", NumOfAlbums = 2 };
+            Artist garrix = new Artist() { Id = 8, FestivalId = tomorrowland.Id, Name = "Martin Garrix", NumOfAlbums = 1 };
+
+            Song ari1 = new Song() { Id = 1, ArtistId = ariana.Id, Title = "imagine", Genre = "R&B", Lenght = 212 };
+            Song ari2 = new Song() { Id = 2, ArtistId = ariana.Id, Title = "no tears left to cry", Genre = "Pop", Lenght = 205 };
+            Song ari3 = new Song() { Id = 3, ArtistId = ariana.Id, Title = "breathin", Genre = "Pop", Lenght = 198 };
+            Song weeknd1 = new Song() { Id = 4, ArtistId = weeknd.Id, Title = "Call Out My Name", Genre = "R&B", Lenght = 228 };
+            Song weeknd2 = new Song() { Id = 5, ArtistId = weeknd.Id, Title = "Blinding Lights", Genre = "Pop", Lenght = 202 };
+            Song em1 = new Song() { Id = 6, ArtistId = em.Id, Title = "Without Me", Genre = "Hip-Hop", Lenght = 290 };
+            Song em2 = new Song() { Id = 7, ArtistId = em.Id, Title = "Lose Yourself", Genre = "Hip-Hop", Lenght = 322 };
+            Song dua1 = new Song() { Id = 8, ArtistId = dua.Id, Title = "New Rules", Genre = "Pop", Lenght = 209 };
+            Song dua2 = new Song() { Id = 9, ArtistId = dua.Id, Title = "Physical", Genre = "Pop", Lenght = 194 };
+            Song sia1 = new Song() { Id = 10, ArtistId = sia.Id, Title = "Elastic Heart", Genre = "Pop", Lenght = 257 };
+            Song illenium1 = new Song() { Id = 11, ArtistId = illenium.Id, Title = "Good Things Fall Apart", Genre = "Pop", Lenght = 216 };
+            Song illenium2 = new Song() { Id = 12, ArtistId = illenium.Id, Title = "Nightlight", Genre = "Dance", Lenght = 222 };
+            Song zedd1 = new Song() { Id = 13, ArtistId = zedd.Id, Title = "Stay", Genre = "EDM", Lenght = 210 };
+            Song zedd2 = new Song() { Id = 14, ArtistId = zedd.Id, Title = "The Middle", Genre = "Dance", Lenght = 184};
+            Song garrix1 = new Song() { Id = 15, ArtistId = garrix.Id, Title = "Animals", Genre = "EDM", Lenght = 184};
+            Song garrix2 = new Song() { Id = 16, ArtistId = garrix.Id, Title = "There for You", Genre = "Pop", Lenght = 221};
+
+            modelBuilder.Entity<Festival>().HasData(lolla, sziget, sound, tomorrowland);
+            modelBuilder.Entity<Artist>().HasData(ariana, weeknd, em, dua, sia, illenium, zedd, garrix);
+            modelBuilder.Entity<Song>().HasData(ari1, ari2, ari3, weeknd1, weeknd2, em1, em2, dua1, dua2, sia1, illenium1, illenium2, zedd1, zedd2, garrix1, garrix2);
+
         }
     }
 }
