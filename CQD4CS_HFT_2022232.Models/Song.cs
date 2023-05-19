@@ -16,7 +16,7 @@ namespace CQD4CS_HFT_2022232.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Genre { get; set; }
-        public int Lenght { get; set; }
+        public int Length { get; set; }
 
         [ForeignKey(nameof(Artist))]
         public int ArtistId { get; set; }
@@ -25,7 +25,7 @@ namespace CQD4CS_HFT_2022232.Models
 
         public override string ToString()
         {
-            return $"#{Id}-SONG: Title = {Title}, Genre = {Genre}, Lenght = {Lenght}, ArtistId = {ArtistId}";
+            return $"#{Id}-SONG: Title = {Title}, Genre = {Genre}, Length = {Length}, ArtistId = {ArtistId}";
         }
     }
 }

@@ -51,5 +51,38 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
         {
             this.repo.Update(item);
         }
+
+        //non cruds
+
+        //Total duration of a festival by summing the lengths of all songs performed by its artists
+        public int TotalDurationOfFestival(int festivalId)
+        {
+            return this.repo.ReadAll()
+                            .Where(festival => festival.Id == festivalId)
+                            .SelectMany(festival => festival.Artists)
+                            .SelectMany(artist => artist.Songs)
+                            .Sum(song => song.Length);
+        }
+
+        //Festival with the most artists
+        public string FestivalWithMostArtists()
+        {
+            return this.repo.ReadAll()
+                            .OrderByDescending(festival => festival.Artists.Count)
+                            .FirstOrDefault().Name;
+                            
+        }
+
+        //Longest song per artist
+        public string LongestSongOfArtist(string name)
+        {
+            return this.repo.ReadAll()
+                            .SelectMany(festival => festival.Artists)
+                            .Where(artist => artist.Name == name)
+                            .SelectMany (artist => artist.Songs)
+                            .OrderByDescending(song => song.Length)
+                            .FirstOrDefault().Title;
+        }
+
     }
 }

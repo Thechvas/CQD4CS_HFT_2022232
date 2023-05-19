@@ -19,9 +19,9 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
 
         public void Create(Song item)
         {
-            if (item.Lenght < 0)
+            if (item.Length < 0)
             {
-                throw new ArgumentException("Lenght of songs cannot be negative!");
+                throw new ArgumentException("Length of songs cannot be negative!");
             }
             this.repo.Create(item);
         }
