@@ -77,11 +77,11 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
         }
 
         //Longest song per artist
-        public string LongestSongOfArtist(string name)
+        public string LongestSongOfArtist(string artistName)
         {
             return this.repo.ReadAll()
                             .SelectMany(festival => festival.Artists)
-                            .Where(artist => artist.Name == name)
+                            .Where(artist => artist.Name == artistName)
                             .SelectMany (artist => artist.Songs)
                             .OrderByDescending(song => song.Length)
                             .FirstOrDefault().Title;
@@ -100,7 +100,7 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
                    };
         }
 
-        //
+        //Genres, number of songs in genres, summarized lenghts of songs in genres
         public IEnumerable<GenreInfo> GenreStatistics()
         {
             return from x in this.repo.ReadAll().SelectMany(t => t.Artists).SelectMany(z => z.Songs)
