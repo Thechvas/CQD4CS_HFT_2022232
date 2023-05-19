@@ -3,9 +3,11 @@ using CQD4CS_HFT_2022232.Models;
 using CQD4CS_HFT_2022232.Models.DTOs;
 using CQD4CS_HFT_2022232.Repository.Interfaces;
 using CQD4CS_HFT_2022232.Repository.ModelRepositories;
+using Humanizer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -96,8 +98,20 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
                        ArtistCount = grp.Count(),
                        AvgNumOfAlbums = grp.Average(n => n.NumOfAlbums)
                    };
-                   
+        }
 
+        //
+        public IEnumerable<GenreInfo> GenreStatistics()
+        {
+            return from x in this.repo.ReadAll().SelectMany(t => t.Artists).SelectMany(z => z.Songs)
+                   group x by x.Genre into grp
+                   orderby grp.Sum(y => y.Length) descending
+                   select new GenreInfo()
+                   {
+                       GenreName = grp.Key,
+                       SongNumber = grp.Count(),
+                       SumLength = grp.Sum(n => n.Length)
+                   };
         }
     }
 }

@@ -23,6 +23,7 @@ namespace CQD4CS_HFT_2022232.Client
             var nc2 = logic.FestivalWithMostArtists();
             var nc3 = logic.LongestSongOfArtist("Eminem");
             var nc4 = logic.AlbumStatistics().ToArray();
+            var nc5 = logic.GenreStatistics().ToArray();
 
             ;
         }
