@@ -16,10 +16,21 @@ namespace CQD4CS_HFT_2022232.Models.DTOs
         {
 
         }
+        public override bool Equals(object obj)
+        {
+            var other = obj as GenreInfo;
+            return GenreName == other.GenreName && SongNumber == other.SongNumber && SumLength == other.SumLength;
+        }
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.GenreName, this.SongNumber, this.SumLength);
+        }
 
         public override string ToString()
         {
-            return $"GenreName = {GenreName}, SongNumber = {SongNumber}, SumLenth = {SumLength}";
+            return $"GenreName = {GenreName}, SongNumber = {SongNumber}, SumLength = {SumLength}";
         }
+
+
     }
 }

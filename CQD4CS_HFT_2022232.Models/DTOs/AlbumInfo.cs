@@ -16,10 +16,21 @@ namespace CQD4CS_HFT_2022232.Models.DTOs
         {
             
         }
+        public override bool Equals(object obj)
+        {
+            var other = obj as AlbumInfo;
+            return FestivalName == other.FestivalName && ArtistCount == other.ArtistCount && AvgNumOfAlbums == other.AvgNumOfAlbums;
+        }
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.FestivalName, this.ArtistCount, this.AvgNumOfAlbums);
+        }
 
         public override string ToString()
         {
             return $"FestivalName = {FestivalName}, ArtistCount = {ArtistCount}, AvgNumOfAlbums = {AvgNumOfAlbums}";
         }
+
+
     }
 }
