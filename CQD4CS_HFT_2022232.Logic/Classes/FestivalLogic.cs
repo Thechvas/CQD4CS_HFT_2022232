@@ -1,5 +1,6 @@
 ﻿using CQD4CS_HFT_2022232.Logic.Interfaces;
 using CQD4CS_HFT_2022232.Models;
+using CQD4CS_HFT_2022232.Models.DTOs;
 using CQD4CS_HFT_2022232.Repository.Interfaces;
 using CQD4CS_HFT_2022232.Repository.ModelRepositories;
 using System;
@@ -84,5 +85,19 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
                             .FirstOrDefault().Title;
         }
 
+        //Festivals with its number of artists and their average number of albums 
+        public IEnumerable<AlbumInfo> AlbumStatistics()
+        {
+            return from x in this.repo.ReadAll().SelectMany(t => t.Artists)
+                   group x by x.Festival.Name into grp
+                   select new AlbumInfo()
+                   {
+                       FestivalName = grp.Key,
+                       ArtistCount = grp.Count(),
+                       AvgNumOfAlbums = grp.Average(n => n.NumOfAlbums)
+                   };
+                   
+
+        }
     }
 }
