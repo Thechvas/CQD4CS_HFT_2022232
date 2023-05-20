@@ -1,4 +1,5 @@
 ﻿using CQD4CS_HFT_2022232.Models;
+using CQD4CS_HFT_2022232.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace CQD4CS_HFT_2022232.Logic.Interfaces
         Artist Read(int id);
         IQueryable<Artist> ReadAll();
         void Update(Artist item);
+        public IEnumerable<AlbumInfo> AlbumStatistics();
     }
 }

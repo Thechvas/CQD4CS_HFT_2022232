@@ -1,4 +1,5 @@
 ﻿using CQD4CS_HFT_2022232.Models;
+using CQD4CS_HFT_2022232.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,8 @@ namespace CQD4CS_HFT_2022232.Logic.Interfaces
         Song Read(int id);
         IQueryable<Song> ReadAll();
         void Update(Song item);
+        public string LongestSongOfArtist(string artistName);
+        public IEnumerable<ArtistInfo> ArtistStatistics();
+        public int TotalDurationOfFestival(int festivalId);
     }
 }

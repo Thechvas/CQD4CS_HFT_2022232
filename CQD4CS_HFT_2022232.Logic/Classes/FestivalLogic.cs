@@ -55,18 +55,6 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
             this.repo.Update(item);
         }
 
-        //non cruds
-
-        //Total duration of a festival by summing the lengths of all songs performed by its artists
-        public int TotalDurationOfFestival(int festivalId)
-        {
-            return this.repo.ReadAll()
-                            .Where(festival => festival.Id == festivalId)
-                            .SelectMany(festival => festival.Artists)
-                            .SelectMany(artist => artist.Songs)
-                            .Sum(song => song.Length);
-        }
-
         //Festival with the most artists
         public string FestivalWithMostArtists()
         {
@@ -76,42 +64,5 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
                             
         }
 
-        //Longest song per artist
-        public string LongestSongOfArtist(string artistName)
-        {
-            return this.repo.ReadAll()
-                            .SelectMany(festival => festival.Artists)
-                            .Where(artist => artist.Name == artistName)
-                            .SelectMany (artist => artist.Songs)
-                            .OrderByDescending(song => song.Length)
-                            .FirstOrDefault().Title;
-        }
-
-        //Festivals with its number of artists and their average number of albums 
-        public IEnumerable<AlbumInfo> AlbumStatistics()
-        {
-            return from x in this.repo.ReadAll().SelectMany(t => t.Artists)
-                   group x by x.Festival.Name into grp
-                   select new AlbumInfo()
-                   {
-                       FestivalName = grp.Key,
-                       ArtistCount = grp.Count(),
-                       AvgNumOfAlbums = grp.Average(n => n.NumOfAlbums)
-                   };
-        }
-
-        //Genres, number of songs in genres, summarized lenghts of songs in genres
-        public IEnumerable<GenreInfo> GenreStatistics()
-        {
-            return from x in this.repo.ReadAll().SelectMany(t => t.Artists).SelectMany(z => z.Songs)
-                   group x by x.Genre into grp
-                   orderby grp.Sum(y => y.Length) descending
-                   select new GenreInfo()
-                   {
-                       GenreName = grp.Key,
-                       SongNumber = grp.Count(),
-                       SumLength = grp.Sum(n => n.Length)
-                   };
-        }
     }
 }

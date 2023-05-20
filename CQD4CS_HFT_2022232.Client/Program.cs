@@ -16,14 +16,18 @@ namespace CQD4CS_HFT_2022232.Client
             var songs = db.Songs.ToArray();
 
             var repo = new FestivalRepository(db);
-            var logic = new FestivalLogic(repo);
+            var repo1 = new ArtistRepository(db);
+            var repo2 = new SongRepository(db);
+            var flogic = new FestivalLogic(repo);
+            var alogic = new ArtistLogic(repo1);
+            var slogic = new SongLogic(repo2);
 
-            var items = logic.ReadAll();
-            var nc1 = logic.TotalDurationOfFestival(1);
-            var nc2 = logic.FestivalWithMostArtists();
-            var nc3 = logic.LongestSongOfArtist("Eminem");
-            var nc4 = logic.AlbumStatistics().ToArray();
-            var nc5 = logic.GenreStatistics().ToArray();
+            var items = flogic.ReadAll();
+            var nc1 = slogic.TotalDurationOfFestival(1);
+            var nc2 = flogic.FestivalWithMostArtists();
+            var nc3 = slogic.LongestSongOfArtist("Eminem");
+            var nc4 = alogic.AlbumStatistics().ToArray();
+            var nc5 = slogic.ArtistStatistics().ToArray();
 
             ;
         }

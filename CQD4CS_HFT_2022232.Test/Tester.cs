@@ -180,8 +180,15 @@ namespace CQD4CS_HFT_2022232.Test
         [Test]
         public void TotalDurationOfFestivalTester()
         {
-            var result = festivalLogic.TotalDurationOfFestival(2);
+            var result = songLogic.TotalDurationOfFestival(2);
             Assert.That(result, Is.EqualTo(236));
+        }
+
+        [Test]
+        public void LongestSongOfArtistTester()
+        {
+            var result = songLogic.LongestSongOfArtist("Taylor Swift");
+            Assert.That(result, Is.EqualTo("I Did Something Bad"));
         }
 
         [Test]
@@ -192,20 +199,13 @@ namespace CQD4CS_HFT_2022232.Test
         }
 
         [Test]
-        public void LongestSongOfArtist()
-        {
-            var result = festivalLogic.LongestSongOfArtist("Taylor Swift");
-            Assert.That(result, Is.EqualTo("I Did Something Bad"));
-        }
-
-        [Test]
         public void AlbumStatistics_ReturnsValidStatistics()
         {
-            var result = festivalLogic.AlbumStatistics().ToList();
+            var result = artistLogic.AlbumStatistics();
             var expected = new List<AlbumInfo>()
-            { 
+            {
                 new AlbumInfo() { FestivalName = "Volt Fesztivál", ArtistCount = 2, AvgNumOfAlbums = 6 },
-                new AlbumInfo(){ FestivalName = "EFOTT", ArtistCount = 1, AvgNumOfAlbums = 3} 
+                new AlbumInfo(){ FestivalName = "EFOTT", ArtistCount = 1, AvgNumOfAlbums = 3}
             };
             Assert.That(result, Is.EqualTo(expected));
         }
@@ -213,15 +213,16 @@ namespace CQD4CS_HFT_2022232.Test
         [Test]
         public void GenreStatistics_ReturnsValidStatistics()
         {
-            var result = festivalLogic.GenreStatistics().ToList();
-            var expected = new List<GenreInfo>() 
-            { 
-                new GenreInfo() { GenreName = "Pop", SongNumber = 4, SumLength = 606 },
-                new GenreInfo() { GenreName = "R&B", SongNumber = 1, SumLength = 202 },
-                new GenreInfo() { GenreName = "Dance", SongNumber = 1, SumLength = 236 }
+            var result = songLogic.ArtistStatistics();
+            var expected = new List<ArtistInfo>()
+            {
+                new ArtistInfo() { ArtistName = "Taylor Swift", SongNumber = 3, SumLengthOfSongs = 618 },
+                new ArtistInfo() { ArtistName = "Zendaya", SongNumber = 2, SumLengthOfSongs = 426 },
+                new ArtistInfo() { ArtistName = "Kygo", SongNumber = 1, SumLengthOfSongs = 236 }
             };
             Assert.That(result, Is.EqualTo(expected));
         }
+
 
     }
 }
