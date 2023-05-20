@@ -1,9 +1,3 @@
-using CQD4CS_HFT_2022232.Logic.Classes;
-using CQD4CS_HFT_2022232.Logic.Interfaces;
-using CQD4CS_HFT_2022232.Models;
-using CQD4CS_HFT_2022232.Repository.Database;
-using CQD4CS_HFT_2022232.Repository.Interfaces;
-using CQD4CS_HFT_2022232.Repository.ModelRepositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CQD4CS_HFT_2022232.Endpoint
+namespace CQD4CS
 {
     public class Startup
     {
@@ -31,21 +25,11 @@ namespace CQD4CS_HFT_2022232.Endpoint
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<FestivalDbContext>();
-
-            services.AddTransient<IRepository<Festival>, FestivalRepository>();
-            services.AddTransient<IRepository<Artist>, ArtistRepository>();
-            services.AddTransient<IRepository<Song>, SongRepository>();
-
-            services.AddTransient<IFestivalLogic, FestivalLogic>();
-            services.AddTransient<IArtistLogic, ArtistLogic>();
-            services.AddTransient<ISongLogic, SongLogic>();
-
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CQD4CS_HFT_2022232.Endpoint", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CQD4CS", Version = "v1" });
             });
         }
 
@@ -56,7 +40,7 @@ namespace CQD4CS_HFT_2022232.Endpoint
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CQD4CS_HFT_2022232.Endpoint v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CQD4CS v1"));
             }
 
             app.UseRouting();
