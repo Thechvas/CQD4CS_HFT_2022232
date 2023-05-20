@@ -1,6 +1,7 @@
 ﻿using CQD4CS_HFT_2022232.Logic.Classes;
 using CQD4CS_HFT_2022232.Logic.Interfaces;
 using CQD4CS_HFT_2022232.Models;
+using CQD4CS_HFT_2022232.Models.DTOs;
 using CQD4CS_HFT_2022232.Repository.Interfaces;
 using Moq;
 using NUnit.Framework;
@@ -48,21 +49,21 @@ namespace CQD4CS_HFT_2022232.Test
             {
                 Name = "Zendaya",
                 Id = 1,
-                FestivalId = fakeFest1.Id,
+                Festival = fakeFest1,
                 NumOfAlbums = 1
             };
             Artist fakeArtist2 = new Artist()
             {
                 Name = "Taylor Swift",
                 Id = 2,
-                FestivalId = fakeFest1.Id,
+                Festival = fakeFest1,
                 NumOfAlbums = 10
             };
             Artist fakeArtist3 = new Artist()
             {
                 Name = "Kygo",
                 Id = 3,
-                FestivalId = fakeFest2.Id,
+                Festival = fakeFest2,
                 NumOfAlbums = 3,
             };
 
@@ -76,6 +77,7 @@ namespace CQD4CS_HFT_2022232.Test
                     Id = 1,
                     Location = "Sopron",
                     Duration = 4
+
                 },
                 new Festival()
                 {
@@ -97,21 +99,21 @@ namespace CQD4CS_HFT_2022232.Test
                 {
                     Name = "Zendaya",
                     Id = 1,
-                    FestivalId = fakeFest1.Id,
+                    Festival = fakeFest1,
                     NumOfAlbums = 1
                 },
                 new Artist()
                 {
                     Name = "Taylor Swift",
                     Id = 2,
-                    FestivalId = fakeFest1.Id,
-                    NumOfAlbums = 10
+                    Festival = fakeFest1,
+                    NumOfAlbums = 11
                 },
                 new Artist()
                 {
                     Name = "Kygo",
                     Id = 3,
-                    FestivalId = fakeFest2.Id,
+                    Festival = fakeFest2,
                     NumOfAlbums = 3
                 }
             }.AsQueryable());
@@ -126,7 +128,7 @@ namespace CQD4CS_HFT_2022232.Test
                 {
                     Title = "Replay",
                     Id = 1,
-                    ArtistId = fakeArtist1.Id,
+                    Artist = fakeArtist1,
                     Genre = "Pop",
                     Length = 209
                 },
@@ -134,7 +136,7 @@ namespace CQD4CS_HFT_2022232.Test
                 {
                     Title = "Rewrite The Stars",
                     Id = 2,
-                    ArtistId = fakeArtist1.Id,
+                    Artist = fakeArtist1,
                     Genre = "Pop",
                     Length = 217
                 },
@@ -142,7 +144,7 @@ namespace CQD4CS_HFT_2022232.Test
                 {
                     Title = "Lavender Haze",
                     Id = 3,
-                    ArtistId = fakeArtist2.Id,
+                    Artist = fakeArtist2,
                     Genre = "R&B",
                     Length = 202
                 },
@@ -150,7 +152,7 @@ namespace CQD4CS_HFT_2022232.Test
                 {
                     Title = "Cruel Summer",
                     Id = 4,
-                    ArtistId = fakeArtist2.Id,
+                    Artist = fakeArtist2,
                     Genre = "Pop",
                     Length = 178
                 },
@@ -158,7 +160,7 @@ namespace CQD4CS_HFT_2022232.Test
                 {
                     Title = "I Did Something Bad",
                     Id = 5,
-                    ArtistId = fakeArtist2.Id,
+                    Artist = fakeArtist2,
                     Genre = "Pop",
                     Length = 238
                 },
@@ -166,13 +168,59 @@ namespace CQD4CS_HFT_2022232.Test
                 {
                     Title = "Stargazing",
                     Id = 6,
-                    ArtistId = fakeArtist3.Id,
+                    Artist = fakeArtist3,
                     Genre = "Dance",
                     Length = 236
                 }
             }.AsQueryable());
 
             songLogic = new SongLogic(mockSongRepo.Object);
+        }
+
+        [Test]
+        public void TotalDurationOfFestivalTester()
+        {
+            var result = festivalLogic.TotalDurationOfFestival(2);
+            Assert.That(result, Is.EqualTo(236));
+        }
+
+        [Test]
+        public void FestivalWithMostArtistsTest()
+        {
+            var result = festivalLogic.FestivalWithMostArtists();
+            Assert.That(result, Is.EqualTo("Volt Fesztivál"));   
+        }
+
+        [Test]
+        public void LongestSongOfArtist()
+        {
+            var result = festivalLogic.LongestSongOfArtist("Taylor Swift");
+            Assert.That(result, Is.EqualTo("I Did Something Bad"));
+        }
+
+        [Test]
+        public void AlbumStatistics_ReturnsValidStatistics()
+        {
+            var result = festivalLogic.AlbumStatistics().ToList();
+            var expected = new List<AlbumInfo>()
+            { 
+                new AlbumInfo() { FestivalName = "Volt Fesztivál", ArtistCount = 2, AvgNumOfAlbums = 6 },
+                new AlbumInfo(){ FestivalName = "EFOTT", ArtistCount = 1, AvgNumOfAlbums = 3} 
+            };
+            Assert.That(result, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void GenreStatistics_ReturnsValidStatistics()
+        {
+            var result = festivalLogic.GenreStatistics().ToList();
+            var expected = new List<GenreInfo>() 
+            { 
+                new GenreInfo() { GenreName = "Pop", SongNumber = 4, SumLength = 606 },
+                new GenreInfo() { GenreName = "R&B", SongNumber = 1, SumLength = 202 },
+                new GenreInfo() { GenreName = "Dance", SongNumber = 1, SumLength = 236 }
+            };
+            Assert.That(result, Is.EqualTo(expected));
         }
 
     }
