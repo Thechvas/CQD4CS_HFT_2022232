@@ -66,6 +66,7 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
                    };
         }
 
+        //Artist who has the most number of albums in a festival based on its location
         public string ArtistWithMostAlbums(string festivalLocation)
         {
             return this.repo.ReadAll()
