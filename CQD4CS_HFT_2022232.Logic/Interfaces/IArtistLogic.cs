@@ -16,5 +16,6 @@ namespace CQD4CS_HFT_2022232.Logic.Interfaces
         IQueryable<Artist> ReadAll();
         void Update(Artist item);
         public IEnumerable<AlbumInfo> AlbumStatistics();
+        public string ArtistWithMostAlbums(string festivalLocation);
     }
 }

@@ -65,5 +65,13 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
                        AvgNumOfAlbums = grp.Average(n => n.NumOfAlbums)
                    };
         }
+
+        public string ArtistWithMostAlbums(string festivalLocation)
+        {
+            return this.repo.ReadAll()
+                .Where(f => f.Festival.Location == festivalLocation)
+                .OrderByDescending(t => t.NumOfAlbums)
+                .FirstOrDefault().Name;
+        }
     }
 }

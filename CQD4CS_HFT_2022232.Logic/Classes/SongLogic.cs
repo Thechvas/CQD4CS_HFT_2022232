@@ -82,5 +82,14 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
                             .Where(song => song.Artist.Festival.Id == festivalId)
                             .Sum(song => song.Length);
         }
+
+        //Finds a song from a specific artist in a specific genre
+        public string SpecificSongFinder(string artistName, string genreName)
+        {
+            return this.repo.ReadAll()
+                .Where(t => t.Artist.Name == artistName)
+                .Where(z => z.Genre == genreName)
+                .FirstOrDefault().Title;
+        }
     }
 }

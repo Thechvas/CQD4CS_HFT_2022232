@@ -28,6 +28,8 @@ namespace CQD4CS_HFT_2022232.Client
             var nc3 = slogic.LongestSongOfArtist("Eminem");
             var nc4 = alogic.AlbumStatistics().ToArray();
             var nc5 = slogic.ArtistStatistics().ToArray();
+            var nc6 = slogic.SpecificSongFinder("Ariana Grande", "R&B");
+            var nc7 = alogic.ArtistWithMostAlbums("Budapest");
 
             ;
         }

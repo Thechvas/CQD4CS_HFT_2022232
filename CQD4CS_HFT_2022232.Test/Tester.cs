@@ -23,6 +23,7 @@ namespace CQD4CS_HFT_2022232.Test
         Mock<IRepository<Artist>> mockArtistRepo;
         Mock<IRepository<Song>> mockSongRepo;
 
+
         [SetUp]
         public void Init()
         {
@@ -180,8 +181,8 @@ namespace CQD4CS_HFT_2022232.Test
         [Test]
         public void TotalDurationOfFestivalTester()
         {
-            var result = songLogic.TotalDurationOfFestival(2);
-            Assert.That(result, Is.EqualTo(236));
+            var result = songLogic.TotalDurationOfFestival(1);
+            Assert.That(result, Is.EqualTo(1044));
         }
 
         [Test]
@@ -196,6 +197,13 @@ namespace CQD4CS_HFT_2022232.Test
         {
             var result = festivalLogic.FestivalWithMostArtists();
             Assert.That(result, Is.EqualTo("Volt Fesztivál"));   
+        }
+
+        [Test]
+        public void ArtistWithMostAlbumsTester()
+        {
+            var result = artistLogic.ArtistWithMostAlbums("Sopron");
+            Assert.That(result, Is.EqualTo("Taylor Swift"));
         }
 
         [Test]
@@ -223,6 +231,62 @@ namespace CQD4CS_HFT_2022232.Test
             Assert.That(result, Is.EqualTo(expected));
         }
 
+        [Test]
+        public void SpecificSongFinderTest()
+        {
+            var result = songLogic.SpecificSongFinder("Taylor Swift", "Pop");
+            Assert.That(result, Is.EqualTo("Cruel Summer"));
+        }
 
+        [TestCase("SZIN", 3, true)]
+        [TestCase("Coachella", 1, false)]
+        public void FestivalCreateTester(string name, int duration, bool result)
+        {
+            var testFestival = new Festival() { Name = name, Duration = duration };
+
+            if (result)
+            {
+                Assert.That(() => { festivalLogic.Create(testFestival); }, Throws.Nothing);
+            }
+            else
+            {
+                Assert.That(() => { festivalLogic.Create(testFestival); }, Throws.Exception);
+            }
+        }
+
+        [TestCase("NF", 0, true)]
+        [TestCase("Alan Walker", -5, false)]
+        public void ArtistCreateTester(string name, int numOfAlbums, bool result)
+        {
+            var testArtist = new Artist() { Name = name, NumOfAlbums = numOfAlbums };
+
+            if (result)
+            {
+                Assert.That(() => { artistLogic.Create(testArtist); }, Throws.Nothing);
+            }
+            else
+            {
+                Assert.That(() => { artistLogic.Create(testArtist); }, Throws.Exception);
+            }
+        }
+
+        [TestCase("Faded", -230, false)]
+        [TestCase("Leave Me Alone", 323, true)]
+        public void SongCreateTester(string title, int length, bool result)
+        {
+            var testSong = new Song() { Title = title, Length = length };
+
+            if (result)
+            {
+                Assert.That(() => { songLogic.Create(testSong); }, Throws.Nothing);
+            }
+            else
+            {
+                Assert.That(() => { songLogic.Create(testSong); }, Throws.Exception);
+            }
+        }
+
+    
+    
     }
 }

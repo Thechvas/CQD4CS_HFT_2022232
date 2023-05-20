@@ -18,5 +18,6 @@ namespace CQD4CS_HFT_2022232.Logic.Interfaces
         public string LongestSongOfArtist(string artistName);
         public IEnumerable<ArtistInfo> ArtistStatistics();
         public int TotalDurationOfFestival(int festivalId);
+        public string SpecificSongFinder(string artistName, string genreName);
     }
 }
