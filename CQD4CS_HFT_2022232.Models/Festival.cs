@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CQD4CS_HFT_2022232.Models
 {
@@ -14,6 +15,7 @@ namespace CQD4CS_HFT_2022232.Models
         public string Location { get; set; }
         public int Duration { get; set; }
         [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<Artist> Artists { get; set; }
 
         public Festival()
