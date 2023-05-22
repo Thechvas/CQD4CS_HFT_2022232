@@ -64,10 +64,10 @@ namespace CQD4CS_HFT_2022232.Repository.Database
             Artist zedd = new Artist() { Id = 7, FestivalId = sound.Id, Name = "Zedd", NumOfAlbums = 2 };
             Artist garrix = new Artist() { Id = 8, FestivalId = tomorrowland.Id, Name = "Martin Garrix", NumOfAlbums = 1 };
 
-            Song ari1 = new Song() { Id = 1, ArtistId = ariana.Id, Title = "imagine", Genre = "R&B", Length = 212 };
+            Song ari1 = new Song() { Id = 1, ArtistId = ariana.Id, Title = "imagine", Genre = "RnB", Length = 212 };
             Song ari2 = new Song() { Id = 2, ArtistId = ariana.Id, Title = "no tears left to cry", Genre = "Pop", Length = 205 };
             Song ari3 = new Song() { Id = 3, ArtistId = ariana.Id, Title = "breathin", Genre = "Pop", Length = 198 };
-            Song weeknd1 = new Song() { Id = 4, ArtistId = weeknd.Id, Title = "Call Out My Name", Genre = "R&B", Length = 228 };
+            Song weeknd1 = new Song() { Id = 4, ArtistId = weeknd.Id, Title = "Call Out My Name", Genre = "RnB", Length = 228 };
             Song weeknd2 = new Song() { Id = 5, ArtistId = weeknd.Id, Title = "Blinding Lights", Genre = "Pop", Length = 202 };
             Song em1 = new Song() { Id = 6, ArtistId = em.Id, Title = "Without Me", Genre = "Hip-Hop", Length = 290 };
             Song em2 = new Song() { Id = 7, ArtistId = em.Id, Title = "Lose Yourself", Genre = "Hip-Hop", Length = 322 };

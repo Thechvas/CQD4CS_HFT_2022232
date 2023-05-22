@@ -25,7 +25,7 @@ namespace CQD4CS_HFT_2022232.Models
 
         public override string ToString()
         {
-            return $"#{Id}-FESTIVAL: Name = {Name}, Location = {Location}, Duartion = {Duration}";
+            return $"#{Id}-FESTIVAL: Name = {Name}, Location = {Location}, Duartion = {Duration} days";
         }
     }
 }

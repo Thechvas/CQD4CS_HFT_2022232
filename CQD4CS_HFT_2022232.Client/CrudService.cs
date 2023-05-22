@@ -42,15 +42,16 @@ namespace CQD4CS_HFT_2022232.Client
 
             foreach (var property in properties)
             {
-                Console.Write($"{property.Name}\t");
+                Console.Write($"{property.Name,-20}\t");
             }
             Console.Write("\n");
+            
 
             foreach (var item in items)
             {
                 foreach (var property in properties)
                 {
-                    Console.Write($"{property.GetValue(item)}\t\t");
+                    Console.Write($"{property.GetValue(item),-20}\t");
                 }
                 Console.Write("\n");
             }

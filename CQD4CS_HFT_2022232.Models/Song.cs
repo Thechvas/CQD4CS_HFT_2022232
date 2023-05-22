@@ -25,7 +25,7 @@ namespace CQD4CS_HFT_2022232.Models
 
         public override string ToString()
         {
-            return $"#{Id}-SONG: Title = {Title}, Genre = {Genre}, Length = {Length}, ArtistId = {ArtistId}";
+            return $"#{Id}-SONG: Title = {Title}, Genre = {Genre}, Length = {Length} seconds, ArtistId = {ArtistId}";
         }
     }
 }

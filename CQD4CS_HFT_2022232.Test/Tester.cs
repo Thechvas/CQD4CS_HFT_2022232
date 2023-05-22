@@ -146,7 +146,7 @@ namespace CQD4CS_HFT_2022232.Test
                     Title = "Lavender Haze",
                     Id = 3,
                     Artist = fakeArtist2,
-                    Genre = "R&B",
+                    Genre = "RnB",
                     Length = 202
                 },
                 new Song()
