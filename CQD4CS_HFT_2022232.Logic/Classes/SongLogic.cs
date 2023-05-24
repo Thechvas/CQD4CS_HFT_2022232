@@ -49,6 +49,10 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
 
         public void Update(Song item)
         {
+            if (item.Length < 0)
+            {
+                throw new ArgumentException("Length of songs cannot be negative!");
+            }
             this.repo.Update(item);
         }
 

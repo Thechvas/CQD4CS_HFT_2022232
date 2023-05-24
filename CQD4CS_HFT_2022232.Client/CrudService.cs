@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CQD4CS_HFT_2022232.Client
@@ -33,7 +34,18 @@ namespace CQD4CS_HFT_2022232.Client
                     property.SetValue(instance, input);
                 }
             }
-            rest.Post(instance, typeof(T).Name);
+            try
+            {
+                rest.Post(instance, typeof(T).Name);
+
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                Thread.Sleep(2500);
+            }
+
         }
         public void List<T>()
         {
@@ -45,7 +57,7 @@ namespace CQD4CS_HFT_2022232.Client
                 Console.Write($"{property.Name,-20}\t");
             }
             Console.Write("\n");
-            
+
 
             foreach (var item in items)
             {
@@ -62,28 +74,58 @@ namespace CQD4CS_HFT_2022232.Client
         {
             Console.WriteLine("Enter Entity's Id to update:");
             int id = int.Parse(Console.ReadLine());
-            var instance = rest.Get<T>(id, typeof(T).Name);
-            var properties = typeof(T).GetProperties().Where(p => p.GetAccessors().All(a => !a.IsVirtual) && p.Name != "Id");
-            foreach (var property in properties)
+            try
             {
-                Console.Write($"New {property.Name} [Old: {property.GetValue(instance)}]= ");
-                string input = Console.ReadLine();
-                if (property.PropertyType == typeof(int))
+                var instance = rest.Get<T>(id, typeof(T).Name);
+                var properties = typeof(T).GetProperties().Where(p => p.GetAccessors().All(a => !a.IsVirtual) && p.Name != "Id");
+                foreach (var property in properties)
                 {
-                    property.SetValue(instance, int.Parse(input));
+                    Console.Write($"New {property.Name} [Old: {property.GetValue(instance)}]= ");
+                    string input = Console.ReadLine();
+                    if (property.PropertyType == typeof(int))
+                    {
+                        property.SetValue(instance, int.Parse(input));
+                    }
+                    else
+                    {
+                        property.SetValue(instance, input);
+                    }
                 }
-                else
+                try
                 {
-                    property.SetValue(instance, input);
+                    rest.Put(instance, typeof(T).Name);
+
+                }
+                catch (Exception e)
+                {
+
+                    Console.WriteLine(e.Message);
+                    Thread.Sleep(2500);
                 }
             }
-            rest.Put(instance, typeof(T).Name);
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Thread.Sleep(2500);
+            }
+
+
         }
         public void Delete<T>()
         {
             Console.WriteLine("Enter Entity's id to delete:");
             int id = int.Parse(Console.ReadLine());
-            rest.Delete(id, typeof(T).Name);
+            try
+            {
+                rest.Get<T>(id, typeof(T).Name);
+                rest.Delete(id, typeof(T).Name);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Thread.Sleep(2500);
+            }
+
         }
     }
 }

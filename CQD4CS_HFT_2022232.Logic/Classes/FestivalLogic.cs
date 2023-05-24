@@ -52,6 +52,10 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
 
         public void Update(Festival item)
         {
+            if (item.Duration < 2)
+            {
+                throw new ArgumentException("A festivals duration must be at least 2 days long!");
+            }
             this.repo.Update(item);
         }
 

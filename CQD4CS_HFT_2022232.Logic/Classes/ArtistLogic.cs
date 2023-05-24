@@ -49,6 +49,10 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
 
         public void Update(Artist item)
         {
+            if (item.NumOfAlbums < 0)
+            {
+                throw new ArgumentException("Number of albums cannot be negative!");
+            }
             this.repo.Update(item);
         }
 
