@@ -24,7 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{F15684
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQD4CS_HFT_2022232.Endpoint", "CQD4CS_HFT_2022232.Endpoint\CQD4CS_HFT_2022232.Endpoint.csproj", "{262EB774-7520-49CA-8638-8CBECAB6DB0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CQD4CS_HFT_2022232.Endpoint", "CQD4CS_HFT_2022232.Endpoint\CQD4CS_HFT_2022232.Endpoint.csproj", "{262EB774-7520-49CA-8638-8CBECAB6DB0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQD4CS_HFT_2022232.WpfClient", "CQD4CS_HFT_2022232.WpfClient\CQD4CS_HFT_2022232.WpfClient.csproj", "{09E69FC6-4167-479A-99F3-AB009183C5DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +58,10 @@ Global
 		{262EB774-7520-49CA-8638-8CBECAB6DB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{262EB774-7520-49CA-8638-8CBECAB6DB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{262EB774-7520-49CA-8638-8CBECAB6DB0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09E69FC6-4167-479A-99F3-AB009183C5DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09E69FC6-4167-479A-99F3-AB009183C5DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09E69FC6-4167-479A-99F3-AB009183C5DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09E69FC6-4167-479A-99F3-AB009183C5DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
