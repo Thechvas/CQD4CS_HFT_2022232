@@ -1,3 +1,4 @@
+using CQD4CS_HFT_2022232.Endpoint.Services;
 using CQD4CS_HFT_2022232.Logic.Classes;
 using CQD4CS_HFT_2022232.Logic.Interfaces;
 using CQD4CS_HFT_2022232.Models;
@@ -43,6 +44,7 @@ namespace CQD4CS_HFT_2022232.Endpoint
             services.AddTransient<IArtistLogic, ArtistLogic>();
             services.AddTransient<ISongLogic, SongLogic>();
 
+            services.AddSignalR();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -75,6 +77,7 @@ namespace CQD4CS_HFT_2022232.Endpoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
             });
         }
     }
