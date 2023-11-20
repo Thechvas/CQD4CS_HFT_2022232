@@ -15,6 +15,38 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        
+        <Label Content="Artists" Background="LightBlue" Grid.Column="0" Grid.Row="0"/>
+        <ListBox ItemsSource="{Binding Artists}" Grid.Column="0" Grid.Row="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Label Content="Songs" Background="LightBlue" Grid.Column="0" Grid.Row="1"/>
+        <ListBox ItemsSource="{Binding Songs}" Grid.Column="0" Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Title}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Label Content="Festivals" Background="LightBlue" Grid.Column="0" Grid.Row="2"/>
+        <ListBox ItemsSource="{Binding Festivals}" Grid.Column="0" Grid.Row="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
     
 </Window>
