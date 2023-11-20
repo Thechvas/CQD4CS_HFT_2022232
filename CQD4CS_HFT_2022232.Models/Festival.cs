@@ -22,6 +22,11 @@ namespace CQD4CS_HFT_2022232.Models
         {
             Artists = new HashSet<Artist>();
         }
+        public Festival(int duration)
+        {
+            Artists = new HashSet<Artist>();
+            this.Duration = duration;
+        }
 
         public override string ToString()
         {

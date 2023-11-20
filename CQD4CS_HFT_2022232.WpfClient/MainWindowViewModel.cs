@@ -99,9 +99,9 @@ namespace CQD4CS_HFT_2022232.WpfClient
 
         public MainWindowViewModel()
         {
-            Artists = new RestCollection<Artist>("http://localhost:36286/", "artist");
-            Songs = new RestCollection<Song>("http://localhost:36286/", "song");
-            Festivals = new RestCollection<Festival>("http://localhost:36286/", "festival");
+            Artists = new RestCollection<Artist>("http://localhost:36286/", "artist", "hub");
+            Songs = new RestCollection<Song>("http://localhost:36286/", "song", "hub");
+            Festivals = new RestCollection<Festival>("http://localhost:36286/", "festival", "hub");
 
             CreateArtistCommand = new RelayCommand(() =>
             {
@@ -123,7 +123,8 @@ namespace CQD4CS_HFT_2022232.WpfClient
             {
                 Festivals.Add(new Festival()
                 {
-                    Name = SelectedFestival.Name
+                    Name = SelectedFestival.Name,
+                    Duration = SelectedFestival.Duration
                 });
             });
 
@@ -176,7 +177,7 @@ namespace CQD4CS_HFT_2022232.WpfClient
 
             SelectedArtist = new Artist();
             SelectedSong = new Song();
-            SelectedFestival = new Festival();
+            SelectedFestival = new Festival(3);
       
         }
     }
