@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         
         <Label Content="Artists" Background="LightBlue" Grid.Column="0" Grid.Row="0"/>
-        <ListBox ItemsSource="{Binding Artists}" Grid.Column="0" Grid.Row="0">
+        <ListBox ItemsSource="{Binding Artists}" SelectedItem="{Binding SelectedArtist}" Grid.Column="0" Grid.Row="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Name}" />
@@ -31,7 +31,7 @@
         </ListBox>
 
         <Label Content="Songs" Background="LightBlue" Grid.Column="0" Grid.Row="1"/>
-        <ListBox ItemsSource="{Binding Songs}" Grid.Column="0" Grid.Row="1">
+        <ListBox ItemsSource="{Binding Songs}" SelectedItem="{Binding SelectedSong}" Grid.Column="0" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Title}" />
@@ -40,13 +40,39 @@
         </ListBox>
 
         <Label Content="Festivals" Background="LightBlue" Grid.Column="0" Grid.Row="2"/>
-        <ListBox ItemsSource="{Binding Festivals}" Grid.Column="0" Grid.Row="2">
+        <ListBox ItemsSource="{Binding Festivals}" SelectedItem="{Binding SelectedFestival}" Grid.Column="0" Grid.Row="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Name}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <StackPanel Grid.Column="1" Grid.Row="0">
+            <Label Content="Name" Background="LightBlue" Padding="10"/>
+            <TextBox Text="{Binding SelectedArtist.Name}" Padding="10"/>
+            <Button Content="Create Artist" Command="{Binding CreateArtistCommand}" Margin="10" Padding="10"/>
+            <Button Content="Delete Artist" Command="{Binding DeleteArtistCommand}" Margin="10" Padding="10"/>
+            <Button Content="Update Artist" Command="{Binding UpdateArtistCommand}" Margin="10" Padding="10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Label Content="Title" Background="LightBlue" Padding="10"/>
+            <TextBox Text="{Binding SelectedSong.Title}" Padding="10"/>
+            <Button Content="Create Song" Command="{Binding CreateSongCommand}" Margin="10" Padding="10"/>
+            <Button Content="Delete Song" Command="{Binding DeleteSongCommand}" Margin="10" Padding="10"/>
+            <Button Content="Update Song" Command="{Binding UpdateSongCommand}" Margin="10" Padding="10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="2">
+            <Label Content="Name" Background="LightBlue" Padding="10"/>
+            <TextBox Text="{Binding SelectedFestival.Name}" Padding="10"/>
+            <Button Content="Create Festival" Command="{Binding CreateFestivalCommand}" Margin="10" Padding="10"/>
+            <Button Content="Delete Festival" Command="{Binding DeleteFestivalCommand}" Margin="10" Padding="10"/>
+            <Button Content="Update Festival" Command="{Binding UpdateFestivalCommand}" Margin="10" Padding="10"/>
+        </StackPanel>
+
+
     </Grid>
     
 </Window>
