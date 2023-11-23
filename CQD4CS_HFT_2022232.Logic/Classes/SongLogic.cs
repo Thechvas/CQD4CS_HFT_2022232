@@ -59,10 +59,12 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
         //Longest song per artist
         public string LongestSongOfArtist(string artistName)
         {
-            return this.repo.ReadAll()
+            var longestSong = this.repo.ReadAll()
                 .Where(song => song.Artist.Name == artistName)
                 .OrderByDescending(song => song.Length)
-                .FirstOrDefault().Title;
+                .FirstOrDefault();
+
+            return longestSong != null ? longestSong.Title : "No song found";
         }
 
         //Artists, number of their songs, summarized lenghts of their songs

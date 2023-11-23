@@ -32,7 +32,22 @@ namespace CQD4CS_HFT_2022232.WpfClient
             }
         }
 
-        public string FestivalWithMostArtists { get; set; }
+
+
+        private string festivalWithMostArtists;
+
+        public string FestivalWithMostArtists
+        {
+            get { return festivalWithMostArtists; }
+            set
+            {
+                if (festivalWithMostArtists != value)
+                {
+                    festivalWithMostArtists = value;
+                    OnPropertyChanged(nameof(FestivalWithMostArtists));
+                }
+            }
+        }
 
         private Artist selectedArtist;
 
