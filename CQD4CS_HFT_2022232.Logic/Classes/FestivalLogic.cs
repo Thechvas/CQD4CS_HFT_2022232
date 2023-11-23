@@ -62,9 +62,11 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
         //Festival with the most artists
         public string FestivalWithMostArtists()
         {
-            return this.repo.ReadAll()
+            var festivalWithMostArtists = this.repo.ReadAll()
                             .OrderByDescending(festival => festival.Artists.Count)
-                            .FirstOrDefault().Name;
+                            .FirstOrDefault();
+
+            return festivalWithMostArtists != null ? festivalWithMostArtists.Name : "No festival found!";
                             
         }
 

@@ -72,10 +72,12 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
 
         public string ArtistWithMostAlbums(string festivalLocation)
         {
-            return this.repo.ReadAll()
+            var artistWithMostAlbums = this.repo.ReadAll()
                 .Where(f => f.Festival.Location == festivalLocation)
                 .OrderByDescending(t => t.NumOfAlbums)
-                .FirstOrDefault().Name;
+                .FirstOrDefault();
+
+            return artistWithMostAlbums != null ? artistWithMostAlbums.Name : "No artist found in this festival!";
         }
     }
 }

@@ -92,10 +92,12 @@ namespace CQD4CS_HFT_2022232.Logic.Classes
         //Finds a song from a specific artist in a specific genre
         public string SpecificSongFinder(string artistName, string genreName)
         {
-            return this.repo.ReadAll()
+            var specificSong = this.repo.ReadAll()
                 .Where(t => t.Artist.Name == artistName)
                 .Where(z => z.Genre == genreName)
-                .FirstOrDefault().Title;
+                .FirstOrDefault();
+
+            return specificSong != null ? specificSong.Title : "No song found";
         }
     }
 }
