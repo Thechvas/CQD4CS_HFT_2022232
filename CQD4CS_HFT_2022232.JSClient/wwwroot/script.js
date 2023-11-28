@@ -74,7 +74,7 @@ async function getdata() {
         .then(x => x.json())
         .then(y => {
             artists = y;
-            //console.log(artists);
+            console.log(artists);
             display();
         });
 }
@@ -83,7 +83,7 @@ async function getdataf() {
         .then(x => x.json())
         .then(y => {
             festivals = y;
-            //console.log(festivals);
+            console.log(festivals);
             displayf();
         });
 }
@@ -92,7 +92,7 @@ async function getdatas() {
         .then(x => x.json())
         .then(y => {
             songs = y;
-            //console.log(songs);
+            console.log(songs);
             displays();
         });
 }
@@ -102,10 +102,7 @@ function display() {
     document.getElementById('resultarea').innerHTML = "";
     artists.forEach(t => {
         document.getElementById('resultarea').innerHTML +=
-            "<tr><td>" + t.id + "</td><td>"
-            + t.name + "</td><td>" +
-            + t.numOfAlbums + "</td><td>" +
-            + t.festivalId + "</td><td>" +
+            "<tr><td>" + t.id + "</td><td>" + t.name + "</td><td>" + t.numOfAlbums + "</td><td>" + t.festivalId + "</td><td>" +
             `<button type="button" onclick="remove(${t.id})">Delete</button>` +
             `<button type="button" onclick="showupdate(${t.id})">Update</button>`
             + "</td></tr>";
@@ -114,10 +111,13 @@ function display() {
 function displayf() {
     document.getElementById('resultareaf').innerHTML = "";
     festivals.forEach(t => {
+        
+        console.log("Location: ", t.location); // Ensure location values are correct
+
         document.getElementById('resultareaf').innerHTML +=
             "<tr><td>" + t.id + "</td><td>"
+            + t.location + "</td><td>"
             + t.name + "</td><td>" +
-            + t.location + "</td><td>" +
             + t.duration + "</td><td>" +
             `<button type="button" onclick="removef(${t.id})">Delete</button>` +
             `<button type="button" onclick="showupdatef(${t.id})">Update</button>`
@@ -129,10 +129,7 @@ function displays() {
     songs.forEach(t => {
         document.getElementById('resultareas').innerHTML +=
             "<tr><td>" + t.id + "</td><td>"
-            + t.title + "</td><td>" +
-            + t.artistId + "</td><td>" +
-            + t.length + "</td><td>" +
-            + t.genre + "</td><td>" +
+            + t.title + "</td><td>" + t.artistId + "</td><td>" + t.length + "</td><td>" + t.genre + "</td><td>" +
             `<button type="button" onclick="removes(${t.id})">Delete</button>` +
             `<button type="button" onclick="showupdates(${t.id})">Update</button>`
             + "</td></tr>";
