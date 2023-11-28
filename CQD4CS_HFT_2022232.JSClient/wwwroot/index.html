@@ -18,6 +18,16 @@
         <button type="button" onclick="create()">Add Artist</button>
     </div>
 
+    <div id="updateformdiv">
+        <label>Artist Name</label>
+        <input type="text" id="artistnametoupdate" />
+        <label>Number Of Albums</label>
+        <input type="number" id="numofalbumstoupdate" />
+        <label>Festival Id</label>
+        <input type="number" id="festivalidtoupdate" />
+        <button type="button" onclick="update()">Update Artist</button>
+    </div>
+
     <table>
         <thead>
             <tr>
@@ -43,6 +53,16 @@
         <label>Duration (>2)</label>
         <input type="number" id="duration" min="2" />
         <button type="button" onclick="createf()">Add Festival</button>
+    </div>
+
+    <div id="updatefestdiv">
+        <label>Festival Name</label>
+        <input type="text" id="festivalnametoupdate" />
+        <label>Location</label>
+        <input type="text" id="locationtoupdate" />
+        <label>Duration (>2)</label>
+        <input type="number" id="durationtoupdate" min="2" />
+        <button type="button" onclick="updatef()">Update Festival</button>
     </div>
 
     <table>
@@ -71,6 +91,18 @@
         <label>Genre</label>
         <input type="text" id="songgenre" />
         <button type="button" onclick="creates()">Add Song</button>
+    </div>
+
+    <div id="updatesongdiv">
+        <label>Song Title</label>
+        <input type="text" id="songtitletoupdate" />
+        <label>Artist Id</label>
+        <input type="number" id="artistidtoupdate" />
+        <label>Length (sec)</label>
+        <input type="number" id="songlengthtoupdate" />
+        <label>Genre</label>
+        <input type="text" id="songgenretoupdate" />
+        <button type="button" onclick="updates()">Update Song</button>
     </div>
 
     <table>

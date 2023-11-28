@@ -33,6 +33,51 @@ th {
     font-weight: bolder;
 }
 
+#updateformdiv {
+    display: none;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#updateformdiv label, button, input {
+    margin: 10px;
+    padding: 7px;
+}
+
+#updateformdiv label {
+    font-weight: bolder;
+}
+
+#updatefestdiv {
+    display: none;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#updatefestdiv label, button, input {
+    margin: 10px;
+    padding: 7px;
+}
+
+#updatefestdiv label {
+    font-weight: bolder;
+}
+
+#updatesongdiv {
+    display: none;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#updatesongdiv label, button, input {
+    margin: 10px;
+    padding: 7px;
+}
+
+#updatesongdiv label {
+    font-weight: bolder;
+}
+
 #festdiv {
     display: flex;
     flex-direction: column;
