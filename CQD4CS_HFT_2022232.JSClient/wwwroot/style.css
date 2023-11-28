@@ -33,6 +33,36 @@ th {
     font-weight: bolder;
 }
 
+#festdiv {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#festdiv label, button, input {
+    margin: 10px;
+    padding: 7px;
+}
+
+#festdiv label {
+    font-weight: bolder;
+}
+
+#songdiv {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#songdiv label, button, input {
+    margin: 10px;
+    padding: 7px;
+}
+
+#songdiv label {
+    font-weight: bolder;
+}
+
 table button {
    padding: 2px;
 }

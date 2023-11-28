@@ -12,8 +12,11 @@
     <div id="formdiv">
         <label>Artist Name</label>
         <input type="text" id="artistname" />
+        <label>Number Of Albums</label>
+        <input type="number" id="numofalbums" />
+        <label>Festival Id</label>
+        <input type="number" id="festivalid" />
         <button type="button" onclick="create()">Add Artist</button>
-
     </div>
 
     <table>
@@ -21,6 +24,8 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>NumberOfAlbums</th>
+                <th>FestivalId</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -28,5 +33,60 @@
         </tbody>
     </table>
 
+
+    <h1>Festival Catalog</h1>
+
+    <div id="festdiv">
+        <label>Festival Name</label>
+        <input type="text" id="festivalname" />
+        <label>Location</label>
+        <input type="text" id="location" />
+        <label>Duration (>2)</label>
+        <input type="number" id="duration" min="2" />
+        <button type="button" onclick="createf()">Add Festival</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Duration</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultareaf">
+        </tbody>
+    </table>
+
+    <h1>Song Catalog</h1>
+
+    <div id="songdiv">
+        <label>Song Title</label>
+        <input type="text" id="songtitle" />
+        <label>Artist Id</label>
+        <input type="number" id="artistid" />
+        <label>Length (sec)</label>
+        <input type="number" id="songlength" />
+        <label>Genre</label>
+        <input type="text" id="songgenre" />
+        <button type="button" onclick="creates()">Add Song</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>ArtistId</th>
+                <th>Length</th>
+                <th>Genre</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultareas">
+        </tbody>
+    </table>
 </body>
     </html>
