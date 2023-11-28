@@ -1,16 +1,77 @@
 ﻿let artists = [];
 let festivals = [];
 let songs = [];
+let connection = null;
 getdata();
 getdataf();
 getdatas();
+setupSignalR();
+
+
+function setupSignalR() {
+    connection = new signalR.HubConnectionBuilder()
+        .withUrl("http://localhost:36286/hub")
+        .configureLogging(signalR.LogLevel.Information)
+        .build();
+
+    connection.on("ArtistCreated", (user, message) => {
+        getdata();
+    });
+
+    connection.on("ArtistDeleted", (user, message) => {
+        getdata();
+    });
+
+    connection.on("ArtistUpdated", (user, message) => {
+        getdata();
+    });
+
+    connection.on("SongCreated", (user, message) => {
+        getdatas();
+    });
+
+    connection.on("SongDeleted", (user, message) => {
+        getdatas();
+    });
+
+    connection.on("SongUpdated", (user, message) => {
+        getdatas();
+    });
+
+    connection.on("FestivalCreated", (user, message) => {
+        getdataf();
+    });
+
+    connection.on("FestivalDeleted", (user, message) => {
+        getdataf();
+    });
+
+    connection.on("FestivalUpdated", (user, message) => {
+        getdataf();
+    });
+
+    connection.onclose(async () => {
+        await start();
+    });
+    start();
+}
+
+async function start() {
+    try {
+        await connection.start();
+        console.log("SignalR Connected.");
+    } catch (err) {
+        console.log(err);
+        setTimeout(start, 5000);
+    }
+};
 
 async function getdata() {
     await fetch('http://localhost:36286/artist')
         .then(x => x.json())
         .then(y => {
             artists = y;
-            console.log(artists);
+            //console.log(artists);
             display();
         });
 }
@@ -19,7 +80,7 @@ async function getdataf() {
         .then(x => x.json())
         .then(y => {
             festivals = y;
-            console.log(festivals);
+            //console.log(festivals);
             displayf();
         });
 }
@@ -28,7 +89,7 @@ async function getdatas() {
         .then(x => x.json())
         .then(y => {
             songs = y;
-            console.log(songs);
+            //console.log(songs);
             displays();
         });
 }
