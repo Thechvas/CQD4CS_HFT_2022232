@@ -5,9 +5,18 @@ let connection = null;
 let artistIdToUpdate = -1;
 let festivalIdToUpdate = -1;
 let songIdToUpdate = -1;
+let festivalWithMostArtists = null;
+let longestSongOfArtist = null;
+let selectedArtist = null;
+let selectedLocation = null;
+let artistWithMostAlbums = null;
+let selectedFestival = null;
+let totalDurationOfFestival = null;
+
 getdata();
 getdataf();
 getdatas();
+getNonCrudData();
 setupSignalR();
 
 
@@ -68,13 +77,12 @@ async function start() {
         setTimeout(start, 5000);
     }
 };
-
 async function getdata() {
     await fetch('http://localhost:36286/artist')
         .then(x => x.json())
         .then(y => {
             artists = y;
-            console.log(artists);
+            //console.log(artists);
             display();
         });
 }
@@ -83,7 +91,7 @@ async function getdataf() {
         .then(x => x.json())
         .then(y => {
             festivals = y;
-            console.log(festivals);
+            //console.log(festivals);
             displayf();
         });
 }
@@ -92,11 +100,100 @@ async function getdatas() {
         .then(x => x.json())
         .then(y => {
             songs = y;
-            console.log(songs);
+            //console.log(songs);
             displays();
         });
 }
 
+async function getNonCrudData() {
+    await fetch('http://localhost:36286/Stat/FestivalWithMostArtists', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'text/plain',
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            return response.text();
+        })
+        .then(data => {
+            festivalWithMostArtists = data;
+            displayNonCrud();
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            
+        });
+
+    await fetch('http://localhost:36286/Stat/LongestSongOfArtist?artistName=' + selectedArtist, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'text/plain',
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            return response.text();
+        })
+        .then(data => {
+            longestSongOfArtist = data;
+
+            displayNonCrud();
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+
+        });
+
+    await fetch('http://localhost:36286/Stat/ArtistWithMostAlbums?festivalLocation=' + selectedLocation, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'text/plain',
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            return response.text();
+        })
+        .then(data => {
+            artistWithMostAlbums = data;
+
+            displayNonCrud();
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+
+        });
+
+    await fetch('http://localhost:36286/Stat/TotalDurationOfFestival?festivalId=' + selectedFestival, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'text/plain',
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            return response.text();
+        })
+        .then(data => {
+            totalDurationOfFestival = data;
+
+            displayNonCrud();
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+
+        });
+    
+}
 
 function display() {
     document.getElementById('resultarea').innerHTML = "";
@@ -111,13 +208,10 @@ function display() {
 function displayf() {
     document.getElementById('resultareaf').innerHTML = "";
     festivals.forEach(t => {
-        
-        console.log("Location: ", t.location); // Ensure location values are correct
-
         document.getElementById('resultareaf').innerHTML +=
             "<tr><td>" + t.id + "</td><td>"
-            + t.location + "</td><td>"
-            + t.name + "</td><td>" +
+            + t.name + "</td><td>"
+            + t.location + "</td><td>" +
             + t.duration + "</td><td>" +
             `<button type="button" onclick="removef(${t.id})">Delete</button>` +
             `<button type="button" onclick="showupdatef(${t.id})">Update</button>`
@@ -136,6 +230,99 @@ function displays() {
     });
 }
 
+function displayNonCrud() {
+    document.getElementById('festivalWithMostArtists').innerHTML = "Festival with Most Artists: " + festivalWithMostArtists;
+
+    let artistSelect = document.getElementById('artistSelect');
+    artistSelect.innerHTML = '<option value="">Select an artist</option>';
+
+    artists.forEach(artist => {
+        artistSelect.innerHTML +=
+            `<option value="${artist.name}">${artist.name}</option>`;
+    })
+
+    artistSelect.addEventListener('change', async (event) => {
+        selectedArtist = event.target.value;
+
+        try {
+            const response = await fetch('http://localhost:36286/Stat/LongestSongOfArtist?artistName=' + selectedArtist, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('error');
+            }
+
+            const longestSong = await response.text();
+            document.getElementById('longestSongOfArtist').innerHTML = longestSong;
+        } catch (error) {
+            console.error('error:', error);
+        }
+
+    });
+    let locationSelect = document.getElementById('locationSelect');
+    locationSelect.innerHTML = '<option value="">Select a location</option>';
+
+    festivals.forEach(festival => {
+        locationSelect.innerHTML +=
+            `<option value="${festival.location}">${festival.location}</option>`;
+    })
+
+    locationSelect.addEventListener('change', async (event) => {
+        selectedLocation = event.target.value;
+
+        try {
+            const response = await fetch('http://localhost:36286/Stat/ArtistWithMostAlbums?festivalLocation=' + selectedLocation, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('error');
+            }
+
+            const artitswma = await response.text();
+            document.getElementById('artistWithMostAlbums').innerHTML = artitswma;
+        } catch (error) {
+            console.error('error:', error);
+        }
+    });
+
+    let festivalSelect = document.getElementById('festivalSelect');
+    festivalSelect.innerHTML = '<option value="">Select a festival</option>';
+
+    festivals.forEach(festival => {
+        festivalSelect.innerHTML +=
+            `<option value="${festival.id}">${festival.name}</option>`;
+    })
+
+    festivalSelect.addEventListener('change', async (event) => {
+        selectedFestival = event.target.value;
+
+        try {
+            const response = await fetch('http://localhost:36286/Stat/TotalDurationOfFestival?festivalId=' + selectedFestival, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('error');
+            }
+
+            const totaldof = await response.text();
+            document.getElementById('totalDurationOfFestival').innerHTML = totaldof;
+        } catch (error) {
+            console.error('error:', error);
+        }
+    });
+}
 
 function remove(id){
     fetch('http://localhost:36286/artist/' + id, {
@@ -147,6 +334,7 @@ function remove(id){
         .then(data => {
             console.log('Success:', data);
             getdata();
+            getNonCrudData();
         })
         .catch((error) => { console.error('Error:', error); });
 }
@@ -160,6 +348,7 @@ function removef(id) {
         .then(data => {
             console.log('Success:', data);
             getdataf();
+            getNonCrudData();
         })
         .catch((error) => { console.error('Error:', error); });
 }
@@ -173,6 +362,8 @@ function removes(id) {
         .then(data => {
             console.log('Success:', data);
             getdatas();
+            getNonCrudData();
+
         })
         .catch((error) => { console.error('Error:', error); });
 }
@@ -206,6 +397,8 @@ function update() {
         .then(data => {
             console.log('Success:', data);
             getdata();
+            getNonCrudData();
+
         })
         .catch((error) => { console.error('Error:', error); });
 }
@@ -239,6 +432,7 @@ function updatef() {
         .then(data => {
             console.log('Success:', data);
             getdataf();
+            getNonCrudData();
         })
         .catch((error) => { console.error('Error:', error); });
 }
@@ -275,6 +469,8 @@ function updates() {
         .then(data => {
             console.log('Success:', data);
             getdatas();
+            getNonCrudData();
+
         })
         .catch((error) => { console.error('Error:', error); });
 }
@@ -298,6 +494,8 @@ function create() {
         {
             console.log('Success:', data);
             getdata();
+            getNonCrudData();
+
         })
         .catch((error) => { console.error('Error:', error); });
 }
@@ -319,6 +517,7 @@ function createf() {
         .then(data => {
             console.log('Success:', data);
             getdataf();
+            getNonCrudData();
         })
         .catch((error) => { console.error('Error:', error); });
 }
@@ -342,6 +541,8 @@ function creates() {
         .then(data => {
             console.log('Success:', data);
             getdatas();
+            getNonCrudData();
+
         })
         .catch((error) => { console.error('Error:', error); });
 }
