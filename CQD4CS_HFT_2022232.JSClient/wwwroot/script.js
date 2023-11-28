@@ -12,6 +12,10 @@ let selectedLocation = null;
 let artistWithMostAlbums = null;
 let selectedFestival = null;
 let totalDurationOfFestival = null;
+let selectedSpecificArtist = null;
+let selectedSpecificGenre = null;
+let specificSong = null;
+
 
 getdata();
 getdataf();
@@ -192,6 +196,28 @@ async function getNonCrudData() {
             console.error('There was a problem with the fetch operation:', error);
 
         });
+
+    await fetch('http://localhost:36286/Stat/SpecificSongFinder?artistName=' + selectedSpecificArtist + '&genreName=' + selectedSpecificGenre, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'text/plain',
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            return response.text();
+        })
+        .then(data => {
+            specificSong = data;
+
+            displayNonCrud();
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+
+        });
     
 }
 
@@ -318,6 +344,59 @@ function displayNonCrud() {
 
             const totaldof = await response.text();
             document.getElementById('totalDurationOfFestival').innerHTML = totaldof;
+        } catch (error) {
+            console.error('error:', error);
+        }
+    });
+
+    let specificArtistSelect = document.getElementById('specificArtist');
+    specificArtistSelect.innerHTML = '<option value="">Select an artist</option>';
+
+    artists.forEach(artist => {
+        specificArtistSelect.innerHTML +=
+            `<option value="${artist.name}">${artist.name}</option>`;
+    })
+
+    let specificGenreSelect = document.getElementById('specificGenre');
+    specificGenreSelect.addEventListener('change', async (event) => {
+        selectedSpecificGenre = event.target.value;
+
+        try {
+            const response = await fetch('http://localhost:36286/Stat/SpecificSongFinder?artistName=' + selectedSpecificArtist + '&genreName=' + selectedSpecificGenre, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('error');
+            }
+
+            const spsong = await response.text();
+            document.getElementById('specificSong').innerHTML = spsong;
+        } catch (error) {
+            console.error('error:', error);
+        }
+    });
+
+    specificArtistSelect.addEventListener('change', async (event) => {
+        selectedSpecificArtist = event.target.value;
+
+        try {
+            const response = await fetch('http://localhost:36286/Stat/SpecificSongFinder?artistName=' + selectedSpecificArtist + '&genreName=' + selectedSpecificGenre, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('error');
+            }
+
+            const spsong = await response.text();
+            document.getElementById('specificSong').innerHTML = spsong;
         } catch (error) {
             console.error('error:', error);
         }
