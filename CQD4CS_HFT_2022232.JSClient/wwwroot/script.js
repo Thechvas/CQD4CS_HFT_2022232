@@ -15,6 +15,8 @@ let totalDurationOfFestival = null;
 let selectedSpecificArtist = null;
 let selectedSpecificGenre = null;
 let specificSong = null;
+let albumstats = [];
+let artiststats = [];
 
 
 getdata();
@@ -218,7 +220,48 @@ async function getNonCrudData() {
             console.error('There was a problem with the fetch operation:', error);
 
         });
-    
+
+    await fetch('http://localhost:36286/Stat/AlbumStatistics', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'text/plain',
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            albumstats = data;
+            displayNonCrud();
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+
+        });
+
+    await fetch('http://localhost:36286/Stat/ArtistStatistics', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'text/plain',
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            artiststats = data;
+            displayNonCrud();
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+
+        });
 }
 
 function display() {
@@ -400,6 +443,18 @@ function displayNonCrud() {
         } catch (error) {
             console.error('error:', error);
         }
+    });
+
+    document.getElementById('albumstatsresult').innerHTML = "";
+    albumstats.forEach(t => {
+        document.getElementById('albumstatsresult').innerHTML +=
+            "<tr><td>" + t.festivalName + "</td><td>" + t.artistCount + "</td><td>" + t.avgNumOfAlbums + "</td></tr>";
+    });
+
+    document.getElementById('artiststatsresult').innerHTML = "";
+    artiststats.forEach(t => {
+        document.getElementById('artiststatsresult').innerHTML +=
+            "<tr><td>" + t.artistName + "</td><td>" + t.songNumber + "</td><td>" + t.sumLengthOfSongs + "</td></tr>";
     });
 }
 
